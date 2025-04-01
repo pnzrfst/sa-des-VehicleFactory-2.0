@@ -17,14 +17,13 @@
 }
 
 .register-button{
-    background-color: #135C98;
+    background-color: #105085;
     border-radius: 8px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     font-weight: 36px;
     width: 202px;
     height: 55px;
-    margin-left: 220px;
     border: none;
     color: #fff;
 }

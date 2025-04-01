@@ -7,23 +7,23 @@ export default function Home() {
 
       <span className='lateral-login'>
         <div className='container'>
-          <h1>Bem-vindo de volta!</h1>
+          <h1 className='title'>Bem-vindo de volta!</h1>
           <h2 className='text-container'>Para continuar, por favor, acesse sua conta.</h2>
-          <h2 className='text-container'>Não possui conta? </h2>
+          <h2 className='h2-container'>Não possui conta? </h2>
+          <Button src='Cadastre-se' dataType='register-button' />
         </div>
         <br />
-        <Button src='Cadastre-se' dataType='register-button' />
       </span>
       <div className='div-form'>
         <form className='login'>
 
-          <label htmlFor="email">Email</label>
-          <input type="text" id='email' />
+          <label htmlFor="email" className='label-login'>Email</label>
+          <input type="text" id='email' className='input-login'/>
 
-          <label htmlFor="password">Senha</label>
-          <input type="text" id='password' />
+          <label htmlFor="password" className='label-login'>Senha</label>
+          <input type="text" id='password' className='input-login'/>
 
-          <Button src='Login' dataType='basic-button' />
+          <Button src='Login' dataType='basic-button'/>
         </form>
       </div>
 
