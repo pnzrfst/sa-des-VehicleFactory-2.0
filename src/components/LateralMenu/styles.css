@@ -52,6 +52,11 @@
     padding: 1rem;
 }
 
+.btns-actions button:hover{
+    background-color: #fff;
+    color: #1A73E8;
+}
+
 .lateral-menu header{
     margin-top: 2rem;
 }
