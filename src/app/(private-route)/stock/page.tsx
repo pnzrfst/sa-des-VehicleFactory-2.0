@@ -10,14 +10,20 @@ export default function Stock() {
                 namePage='Estoque' moduloPage='Armazém Principal'
                 header={["Selecionar", "Descrição", "Código", "Unidade", "Estoque", "Ações"]}
                 ulItens={[{
-                    li1: "Produto",
+                    li1: "Produto 1",
                     li2: "Exemplo01",
                     li3: "un",
                     li4: "Estoque"
                 },
                 {
-                    li1: "Produto",
-                    li2: "Exemplo01",
+                    li1: "Produto 2",
+                    li2: "Exemplo02",
+                    li3: "un",
+                    li4: "Estoque"
+                },
+                {
+                    li1: "Produto 3",
+                    li2: "Exemplo03",
                     li3: "un",
                     li4: "Estoque"
                 },

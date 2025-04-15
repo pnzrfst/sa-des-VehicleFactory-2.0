@@ -21,7 +21,7 @@ type MainPageProps = {
 
 
 
-export default function MainPage({ namePage, moduloPage, header, ulItens, isProduction = false, numberProduction }: MainPageProps) {    
+export default function MainPage({ namePage, moduloPage, header, ulItens, isProduction = false, numberProduction }: MainPageProps) {
     return (
 
         <section className="body-container">
@@ -45,12 +45,20 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                 (<div className="datagrid">
                     <ul>
                         {
-                            ulItens?.map() // terminar
+                            ulItens?.map((item, index) => (
+                                <li key={index}>
+                                    <span className="select"></span>
+                                    <span>{item.li1}</span>
+                                    <span>{item.li2}</span>
+                                    <span>{item.li3}</span>
+                                    <span>{item.li4}</span>
+                                    <div className='btns-action'>
+                                        <button className='edit'><LuPencil size={25} color='white'></LuPencil></button>
+                                        <button className='delete'><FaRegTrashCan size={25} color='white'></FaRegTrashCan></button>
+                                    </div>
+                                </li>
+                            )) // terminar
                         }
-                        <li className='btns-action'>
-                            <button className='edit'><LuPencil size={25} color='white'></LuPencil></button>
-                            <button className='delete'><FaRegTrashCan size={25} color='white'></FaRegTrashCan></button>
-                        </li>
                     </ul>
                 </div>)
                 : (
@@ -82,8 +90,8 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                                     <input type="datetime-local" name="start" id="startProduction" />
                                     <label htmlFor="text">Data de término</label>
                                     <input type="datetime-local" name="end" id="endProduction" readOnly />
-                                    
-                                    
+
+
                                     <IoClose size={20} color="red" id=""></IoClose>
                                     <button type="button">Produzir</button>
                                 </div>
