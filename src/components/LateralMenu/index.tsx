@@ -13,10 +13,10 @@ export default function LateralMenu() {
         <span className="line"></span>
         
         <section className='btns-actions'>
-        <button className="template-btn"><FaArrowRight size={20}/>Estoque</button>
-        <button className="template-btn"><FaArrowRight size={20}/>Produção</button>
-        <button className="template-btn"><FaArrowRight size={20}/>Qualidade</button>
-        <button className="template-btn"><FaArrowRight size={20}/>Manutenção</button>
+        <button><FaArrowRight size={20}/>Estoque</button>
+        <button><FaArrowRight size={20}/>Produção</button>
+        <button><FaArrowRight size={20}/>Qualidade</button>
+        <button><FaArrowRight size={20}/>Manutenção</button>
         </section>
     </div>
     )
