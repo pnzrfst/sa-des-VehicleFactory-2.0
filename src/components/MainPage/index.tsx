@@ -1,25 +1,29 @@
 import { LuPencil } from "react-icons/lu";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { IoMdAdd } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 import './styles.css'
 
 type MainPageProps = {
-    namePage : string;
-    moduloPage: string;
+    namePage?: string;
+    moduloPage?: string;
     header: string[];
-    ulItens: {
+    ulItens?: {
         li1: any;
         li2: any;
         li3: any;
         li4: any;
         li5?: any;
-    }
+    }[],
+    isProduction?: boolean
+    numberProduction?: number
 }
 
 
 
-export default function MainPage({namePage, moduloPage, header, ulItens} : MainPageProps){
-    return(
-        
+export default function MainPage({ namePage, moduloPage, header, ulItens, isProduction = false, numberProduction }: MainPageProps) {    
+    return (
+
         <section className="body-container">
             <header className="div-top">
                 <h1>{namePage}</h1>
@@ -37,21 +41,60 @@ export default function MainPage({namePage, moduloPage, header, ulItens} : MainP
                     <li>{header[5]}</li>
                 </ul>
             </div>
+            {!isProduction ?
+                (<div className="datagrid">
+                    <ul>
+                        {
+                            ulItens?.map() // terminar
+                        }
+                        <li className='btns-action'>
+                            <button className='edit'><LuPencil size={25} color='white'></LuPencil></button>
+                            <button className='delete'><FaRegTrashCan size={25} color='white'></FaRegTrashCan></button>
+                        </li>
+                    </ul>
+                </div>)
+                : (
+                    <div className="formProd">
+                        <form className="production-area">
+                            <h3>Ordem de Produção Nº {numberProduction}</h3>
 
-            <div className="datagrid">
-                <ul>
-                    <li><button className='select'></button></li>
-                    <li>{ulItens.li1}</li>
-                    <li>{ulItens.li2}</li>
-                    <li>{ulItens.li3}</li>
-                    <li>{ulItens.li4}</li>
-                    <li className='btns-action'>
-                        <button className='edit'><LuPencil size={25} color='white'></LuPencil></button>
-                        <button className='delete'><FaRegTrashCan size={25} color='white'></FaRegTrashCan></button>
-                    </li>
-                    
-                </ul>
-            </div>
+                            <div className="name-and-qtd">
+                                <label htmlFor="text">Item para produção</label>
+                                <input type="text" name="nameProduct" id="nameProduct" />
+                                <label htmlFor="text">Quantidade</label>
+                                <input type="number" name="qtdProduct" id="qtdProduct" />
+                            </div>
+
+                            <div className="itens-and-date">
+                                <div className="composicao">
+                                    <h3>Composição</h3>
+                                    <div className="composicao-items">
+                                        <p>aqui estará a composição do produto</p>
+
+                                    </div>
+                                    <IoMdAdd size={30} color="#1A73E8" id="btnIncrease"></IoMdAdd>
+                                </div>
+
+                                <div className="datas-btns">
+
+                                    <div className="inputs"></div>
+                                    <label htmlFor="text">Data de ínicio</label>
+                                    <input type="datetime-local" name="start" id="startProduction" />
+                                    <label htmlFor="text">Data de término</label>
+                                    <input type="datetime-local" name="end" id="endProduction" readOnly />
+                                    
+                                    
+                                    <IoClose size={20} color="red" id=""></IoClose>
+                                    <button type="button">Produzir</button>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                )
+
+            }
         </section>
     )
 }
