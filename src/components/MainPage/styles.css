@@ -47,26 +47,24 @@
     display: flex;
     flex-direction: column;
     padding: 20px 40px;
+
 }
 
 .datagrid ul {
     background-color: white;
     height: 100%;
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid #1a73e8; */
 }
 
-.datagrid ul li {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1a73e8;
-    font-weight: bold;
-    border-bottom: 4px solid #1a73e8;
-    margin-bottom: 1rem;
-    padding: 1rem;
+.datagrid ul span {
+   display: flex;
+   margin: auto;
+   padding: 20px 40px;
+   justify-content: center;
+   text-align: center;
+   align-items: center;
 }
 
 .datagrid ul li .select{
@@ -89,6 +87,9 @@
     padding: 3px;
 }
 
+.btns-action{
+    border: none;
+}
 
 .header {
     display: flex;
