@@ -1,10 +1,10 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-.lateral-menu{
+.lateral-menu {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -16,7 +16,7 @@
 }
 
 
-.lateral-menu header{
+.lateral-menu header {
     display: flex;
     padding: 1rem;
     align-items: center;
@@ -26,7 +26,7 @@
     font-size: 25px;
 }
 
-.lateral-menu span{
+.lateral-menu span {
     display: flex;
     height: 3px;
     width: 300px;
@@ -34,7 +34,7 @@
     background-color: #fff;
 }
 
-.lateral-menu .btns-actions{
+.lateral-menu .btns-actions {
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
@@ -42,11 +42,11 @@
     gap: 66px;
 }
 
-.btns-actions button{
+.btns-actions button {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    height: 75px;
+    height: 45px;
     width: 15rem;
     text-align: center;
     background-color: #1A73E8;
@@ -56,16 +56,23 @@
     color: #fff;
     font-size: 1rem;
     padding: 1rem;
+    text-decoration: none;
+    align-items: center;
 }
 
-.btns-actions button:hover{
+a, .btn-sections a {
+    text-decoration: none !important;
+  }
+  
+.btns-actions button:hover {
     background-color: #fff;
     color: #1A73E8;
 }
 
-.lateral-menu header{
+.lateral-menu header {
     margin-top: 2rem;
 }
-.lateral-menu header h1{
+
+.lateral-menu header h1 {
     font-size: 2rem;
 }
