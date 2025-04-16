@@ -84,16 +84,16 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                                 </div>
 
                                 <div className="datas-btns">
-
-                                    <div className="inputs"></div>
                                     <label htmlFor="text">Data de ínicio</label>
                                     <input type="datetime-local" name="start" id="startProduction" />
                                     <label htmlFor="text">Data de término</label>
                                     <input type="datetime-local" name="end" id="endProduction" readOnly />
 
 
-                                    <IoClose size={20} color="red" id=""></IoClose>
-                                    <button type="button">Produzir</button>
+                                    <div className="btns-production-actions">
+                                        <IoClose size={10} color="white" id="close"></IoClose>
+                                        <button type="button">Produzir</button>
+                                    </div>
                                 </div>
 
                             </div>
