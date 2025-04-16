@@ -47,12 +47,12 @@
     display: flex;
     flex-direction: column;
     padding: 20px 40px;
-
+    overflow-y: scroll;
 }
 
 .datagrid ul {
     background-color: white;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     /* border: 1px solid #1a73e8; */

@@ -27,6 +27,24 @@ export default function Stock() {
                     li3: "un",
                     li4: "Estoque"
                 },
+                {
+                    li1: "Produto 4",
+                    li2: "Exemplo04",
+                    li3: "un",
+                    li4: "Estoque"
+                },
+                {
+                    li1: "Produto 5",
+                    li2: "Exemplo05",
+                    li3: "un",
+                    li4: "Estoque"
+                },
+                {
+                    li1: "Produto 6",
+                    li2: "Exemplo06",
+                    li3: "un",
+                    li4: "Estoque"
+                },
                 ]}
             ></MainPage>
         </div>
