@@ -32,7 +32,7 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
             </header>
 
             <div className="header">
-                <ul>
+                <ul>{}
                     <li>{header[0]}</li>
                     <li>{header[1]}</li>
                     <li>{header[2]}</li>
@@ -57,7 +57,7 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                                         <button className='delete'><FaRegTrashCan size={25} color='white'></FaRegTrashCan></button>
                                     </div>
                                 </li>
-                            )) // terminar
+                            ))
                         }
                     </ul>
                 </div>)
