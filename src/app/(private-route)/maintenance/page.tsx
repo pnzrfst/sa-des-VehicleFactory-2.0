@@ -35,6 +35,30 @@ export default function Maintenance() {
             li2: "Motor",
             li3: "0001",
             li4: "01/10/2006 - 12/10/2006",
+        },
+        {
+            li1: "Instalação",
+            li2: "Motor",
+            li3: "0001",
+            li4: "01/10/2006 - 12/10/2006",
+        },
+        {
+            li1: "Instalação",
+            li2: "Motor",
+            li3: "0001",
+            li4: "01/10/2006 - 12/10/2006",
+        },
+        {
+            li1: "Instalação",
+            li2: "Motor",
+            li3: "0001",
+            li4: "01/10/2006 - 12/10/2006",
+        },
+        {
+            li1: "Instalação",
+            li2: "Motor",
+            li3: "0001",
+            li4: "01/10/2006 - 12/10/2006",
         }
         ]}/>)
 }

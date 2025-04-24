@@ -44,6 +44,30 @@ export default function Stock() {
             li3: "0001",
             li4: "01/10/2006 - 11/10/2006",
           },
+          {
+            li1: "Conserto",
+            li2: "Amortecedor traseiro",
+            li3: "0001",
+            li4: "01/10/2006 - 11/10/2006",
+          },
+          {
+            li1: "Conserto",
+            li2: "Amortecedor traseiro",
+            li3: "0001",
+            li4: "01/10/2006 - 11/10/2006",
+          },
+          {
+            li1: "Conserto",
+            li2: "Amortecedor traseiro",
+            li3: "0001",
+            li4: "01/10/2006 - 11/10/2006",
+          },
+          {
+            li1: "Conserto",
+            li2: "Amortecedor traseiro",
+            li3: "0001",
+            li4: "01/10/2006 - 11/10/2006",
+          }
         ]}
       ></MainPage>
     </div>
