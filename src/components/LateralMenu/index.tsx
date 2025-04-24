@@ -10,7 +10,7 @@ export default function LateralMenu() {
 
     const itens = [
         {
-            label: "Home",
+            label: "Início",
             page: '/home',
         },
         {
