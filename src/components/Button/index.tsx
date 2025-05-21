@@ -1,12 +1,15 @@
 import './styles.css'
 
-type buttonProps ={
+type ButtonProps = {
     src: string;
-    dataType:'register-button' | 'basic-button' | 'browser-btton'
-}
-
-export default function Button({src,dataType}:buttonProps) {
+    dataType: 'register-button' | 'basic-button' | 'browser-btton';
+    onClick?: () => void; // <- nova prop opcional
+  }
+  
+  export default function Button({ src, dataType, onClick }: ButtonProps) {
     return (
-        <button  className={dataType}>{src}</button>
+      <button className={dataType} onClick={onClick}>
+        {src}
+      </button>
     )
-}
+  }

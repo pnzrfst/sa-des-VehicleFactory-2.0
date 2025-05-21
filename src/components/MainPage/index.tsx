@@ -1,8 +1,16 @@
+'use client'
+
 import { LuPencil } from "react-icons/lu";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import './styles.css'
+import { useState } from "react";
+import { ModalMainPage } from "../ModalMainPage";
+import { MaintenanceForm } from "../Forms/MaintenanceForm";
+import { StockForm } from "../Forms/StockForm";
+import { usePathname, useRouter } from "next/navigation";
+import path from "path";
 
 type MainPageProps = {
     namePage?: string;
@@ -22,6 +30,23 @@ type MainPageProps = {
 
 
 export default function MainPage({ namePage, moduloPage, header, ulItens, isProduction = false, numberProduction }: MainPageProps) {
+    const [openModal, setOpenModal] = useState(false)
+    const [modalType, setModalType] = useState<'maintenance' | 'stock' | null>(null)
+
+    const pathName = usePathname();
+
+    const typeModal = pathName === "/stock" ? "stock" : "maintenance";
+    const handleOpen = (type: "maintenance" | "stock") => {
+        setModalType(type);
+        setOpenModal(true);
+    };
+
+    const handleClose = () => {
+        setOpenModal(false);
+        setModalType(null);
+    };
+
+
     return (
 
         <section className="body-container">
@@ -32,7 +57,7 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
             </header>
 
             <div className="header">
-                <ul>{}
+                <ul>{ }
                     <li>{header[0]}</li>
                     <li>{header[1]}</li>
                     <li>{header[2]}</li>
@@ -53,7 +78,7 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                                     <span>{item.li3}</span>
                                     <span>{item.li4}</span>
                                     <div className='btns-action'>
-                                        <button className='edit'><LuPencil size={25} color='white'></LuPencil></button>
+                                        <button className='edit' ><LuPencil size={25} color='white' onClick={() => handleOpen(typeModal)}></LuPencil></button>
                                         <button className='delete'><FaRegTrashCan size={25} color='white'></FaRegTrashCan></button>
                                     </div>
                                 </li>
@@ -67,7 +92,7 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                             <h3>Ordem de Produção Nº {numberProduction}</h3>
 
                             <div className="name-and-qtd">
-                                <label htmlFor="text">Item para produção</label>
+                                <label htmlFor="text">O que será produzido?</label>
                                 <input type="text" name="nameProduct" id="nameProduct" />
                                 <label htmlFor="text">Quantidade</label>
                                 <input type="number" name="qtdProduct" id="qtdProduct" />
@@ -103,6 +128,13 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                 )
 
             }
+
+            <ModalMainPage open={openModal} handleClose={() => handleClose()}>
+                {modalType === 'maintenance' && <MaintenanceForm />}
+                {modalType === 'stock' && <StockForm />}
+            </ModalMainPage>
+
         </section>
+
     )
 }

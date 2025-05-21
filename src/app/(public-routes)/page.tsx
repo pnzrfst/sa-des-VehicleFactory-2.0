@@ -1,7 +1,13 @@
+'use client'
+
 import Button from '@/components/Button';
 import './styles.css'
+import { useState } from 'react';
+import { ModalRegister } from '@/components/ModalRegister';
 
 export default function Home() {
+  const [openModal, setOpenModal] = useState(false);
+  
   return (
     <div className='main'>
 
@@ -10,7 +16,8 @@ export default function Home() {
           <h1 className='title'>Bem-vindo de volta!</h1>
           <h2 className='text-container'>Para continuar, por favor, acesse sua conta.</h2>
           <h2 className='h2-container'>Não possui conta? </h2>
-          <Button src='Cadastre-se' dataType='register-button' />
+          <ModalRegister open ={openModal} handleClose={()=> setOpenModal(!openModal)} />
+          <Button src='Cadastre-se' dataType='register-button' onClick={()=> setOpenModal(true)}/>
         </div>
         <br />
       </span>
