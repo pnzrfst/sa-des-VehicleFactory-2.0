@@ -275,11 +275,23 @@
   width: 50%;
 }
 
+.btns-production-actions button:hover{
+  background-color: #093e85;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
 .btns-production-actions #close{
   background-color: #E81A1A;
-  height: 45px;
+  height: 50px;
   border-radius: 4px;
   font-size: 15px;
   width: 50%;
+}
+
+.btns-production-actions #close:hover{
+  background-color: #800d0d;
+  cursor: pointer;
+  transition: 0.4s;
 }
 
