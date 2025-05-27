@@ -1,6 +1,6 @@
 'use client'
 
-import { TbDoorExit } from "react-icons/tb";
+import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
 import { LuPencil } from "react-icons/lu";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
@@ -37,8 +37,8 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
     const [modalType, setModalType] = useState<'maintenance' | 'stock' | 'production' | null>(null)
 
     const router = useRouter();
-    const handleNavigation = ()=> {
-        router.push('/home')
+    const handleNavigation = () => {
+        router.push('/production_dashboard')
     }
 
 
@@ -142,7 +142,9 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                                     <div className="btns-production-actions">
                                         <IoClose size={10} color="white" id="close"></IoClose>
                                         <button type="button">Produzir</button>
-                                        <button id="otherPageProduction" onClick={handleNavigation}><TbDoorExit size={25} /> </button>
+                                        <button type="button" id="otherPageProduction" onClick={handleNavigation}>
+                                            <TbDoorEnter size={25} />
+                                        </button>
                                     </div>
                                 </div>
 
