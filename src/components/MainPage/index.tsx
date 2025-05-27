@@ -1,5 +1,6 @@
 'use client'
 
+import { TbDoorExit } from "react-icons/tb";
 import { LuPencil } from "react-icons/lu";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
@@ -9,9 +10,11 @@ import { useState } from "react";
 import { ModalMainPage } from "../ModalMainPage";
 import { MaintenanceForm } from "../Forms/MaintenanceForm";
 import { StockForm } from "../Forms/StockForm";
+import { ProductionForm } from "../Forms/Production/ProductionForm";
 import { usePathname, useRouter } from "next/navigation";
 import path from "path";
 
+//o modal ta la em baixo
 type MainPageProps = {
     namePage?: string;
     moduloPage?: string;
@@ -31,12 +34,30 @@ type MainPageProps = {
 
 export default function MainPage({ namePage, moduloPage, header, ulItens, isProduction = false, numberProduction }: MainPageProps) {
     const [openModal, setOpenModal] = useState(false)
-    const [modalType, setModalType] = useState<'maintenance' | 'stock' | null>(null)
+    const [modalType, setModalType] = useState<'maintenance' | 'stock' | 'production' | null>(null)
+
+    const router = useRouter();
+    const handleNavigation = ()=> {
+        router.push('/home')
+    }
+
+
 
     const pathName = usePathname();
 
-    const typeModal = pathName === "/stock" ? "stock" : "maintenance";
-    const handleOpen = (type: "maintenance" | "stock") => {
+    let typeModal: 'stock' | 'maintenance' | 'production';
+
+    if (pathName === "/stock") {
+        typeModal = "stock";
+    } else if (pathName === "/maintenance") {
+        typeModal = "maintenance";
+    } else {
+        typeModal = "production";
+    }
+
+
+
+    const handleOpen = (type: "maintenance" | "stock" | "production") => {
         setModalType(type);
         setOpenModal(true);
     };
@@ -71,8 +92,9 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                     <ul>
                         {
                             ulItens?.map((item, index) => (
+                                // Aqui vai ficar o quadradinho azul !!!
                                 <li key={index}>
-                                    <span className="select"></span>
+                                    <span className="select" ></span>
                                     <span>{item.li1}</span>
                                     <span>{item.li2}</span>
                                     <span>{item.li3}</span>
@@ -105,7 +127,9 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                                         <p>aqui estará a composição do produto</p>
 
                                     </div>
-                                    <IoMdAdd size={30} color="#1A73E8" id="btnIncrease"></IoMdAdd>
+
+                                    <IoMdAdd size={30} color="#1A73E8" onClick={() => handleOpen(typeModal)} />
+
                                 </div>
 
                                 <div className="datas-btns">
@@ -118,6 +142,7 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                                     <div className="btns-production-actions">
                                         <IoClose size={10} color="white" id="close"></IoClose>
                                         <button type="button">Produzir</button>
+                                        <button id="otherPageProduction" onClick={handleNavigation}><TbDoorExit size={25} /> </button>
                                     </div>
                                 </div>
 
@@ -132,6 +157,7 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
             <ModalMainPage open={openModal} handleClose={() => handleClose()}>
                 {modalType === 'maintenance' && <MaintenanceForm />}
                 {modalType === 'stock' && <StockForm />}
+                {modalType === 'production' && <ProductionForm />}
             </ModalMainPage>
 
         </section>
