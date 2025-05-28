@@ -1,10 +1,11 @@
 'use client'
 
 
-import Button from '@/components/Button';
 import './styles.css'
+import Button from '@/components/Button';
 import { TbDoorExit } from 'react-icons/tb';
 import {  useRouter } from "next/navigation";
+import { RiFunctionAddLine } from "react-icons/ri";
 
 
 export default function Production_dashboard() {
@@ -24,9 +25,8 @@ export default function Production_dashboard() {
                     <h3>Principal</h3>
                 </header>
                 <main className='main'>
-                    <div className='filter'>
-                        <button className='buttons'>test</button>
-                        <button type='button' className='buttons' onClick={handleNavigation}> <TbDoorExit size={25} /></button>
+                    <div className='filter-button'>
+                        <button type='button' className='buttons' onClick={handleNavigation}> <RiFunctionAddLine size={20}/></button>
                     </div>
                     <div className="dashboard">
 

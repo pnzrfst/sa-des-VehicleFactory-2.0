@@ -140,11 +140,10 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
 
 
                                     <div className="btns-production-actions">
-                                        <IoClose size={10} color="white" id="close"></IoClose>
-                                        <button type="button">Produzir</button>
-                                        <button type="button" id="otherPageProduction" onClick={handleNavigation}>
-                                            <TbDoorEnter size={25} />
+                                        <button type="button" id="close" onClick={handleNavigation}>
+                                        <IoClose size={10} color="white" id="close"></IoClose> 
                                         </button>
+                                        <button type="button">Produzir</button>
                                     </div>
                                 </div>
 
