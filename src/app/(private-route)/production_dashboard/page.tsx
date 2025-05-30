@@ -26,7 +26,7 @@ export default function Production_dashboard() {
                 </header>
                 <main className='main'>
                     <div className='filter-button'>
-                        <button type='button' className='buttons' onClick={handleNavigation}> <RiFunctionAddLine size={20}/></button>
+                        <button type='button' className='btns' onClick={handleNavigation}> <RiFunctionAddLine size={20}/></button>
                     </div>
                     <div className="dashboard">
 

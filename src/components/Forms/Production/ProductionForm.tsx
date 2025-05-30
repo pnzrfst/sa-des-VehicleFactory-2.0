@@ -26,20 +26,3 @@ export function ProductionForm() {
     );
 }
 
-
-// import { RiSearchEyeLine } from "react-icons/ri";
-// import { TextField } from "@mui/material";
-// import './styles.css';
-
-// export function ProductionForm() {
-//     return (
-//         <div className="container">
-//             <h1>Composição</h1>
-//             <TextField label="Digite o que deseja" variant="outlined" />
-            
-//             <div className="buttonGroup"> 
-//                 <button><RiSearchEyeLine size={20} /></button>
-//             </div>
-//         </div>
-//     );
-// }

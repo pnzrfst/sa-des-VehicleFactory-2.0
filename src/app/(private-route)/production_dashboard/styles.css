@@ -101,11 +101,11 @@
     gap: 10px; 
     width: 100%;
     padding: 0 1rem;
-    margin-right: 22rem;
+    margin-right: 12rem;
     padding: 4px;
 }
 
-.buttons{
+.btns{
     background-color: #1A73E8;
     color: #fff;
     border: none;
@@ -118,7 +118,7 @@
 
 }
 
-.buttons:hover {
+.btns:hover {
     background-color: #093e85;
     cursor: pointer;
     transition: 0.4s;

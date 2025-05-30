@@ -1,6 +1,6 @@
 import { Dialog } from "@mui/material";
 import { Close } from "@mui/icons-material";
-import './styles.css';
+import './ModalMainPage_styles.css';
 
 type ModalMainPageProps = {
     open: boolean;
@@ -11,7 +11,7 @@ type ModalMainPageProps = {
 export function ModalMainPage({ open, handleClose, children }: ModalMainPageProps) {
     return (
         <Dialog open={open} onClose={handleClose}>
-            <div className="close" onClick={handleClose}>
+            <div className="closeModal" onClick={handleClose}>
                 <Close />
             </div>
             <div className="container">

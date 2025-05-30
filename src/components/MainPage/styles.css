@@ -74,11 +74,21 @@
   border-bottom: none; 
 }
 
-.datagrid ul li .select {
+.datagrid ul li .inative-span {
   padding: 0.75rem;
   border: 1px solid #1a73e8;
   background-color: #fff;
-  justify-self: center; /* Center the select box */
+  justify-self: center; 
+  cursor: pointer;
+}
+
+.datagrid ul li .span-selected{
+  padding: 0.75rem;
+  border: 1px solid #fff;
+  background-color: #1a73e8;
+  border-radius: 100%;
+  justify-self: center;
+  cursor: pointer;
 }
 
 .datagrid ul li span {
@@ -263,7 +273,7 @@
   width: 50%;
 }
 
-.btns-production-actions button{
+.btns-production-actions .production{
   background-color: #1A73E8;
   color: #fff;
   border: none;
@@ -275,22 +285,30 @@
   width: 50%;
 }
 
-.btns-production-actions button:hover{
+.btns-production-actions .production:hover{
   background-color: #093e85;
   cursor: pointer;
   transition: 0.4s;
 }
-
-.btns-production-actions #close{
+.close {
   background-color: #E81A1A;
+  border: none;
+  border-radius: 6px;
+  width: 120px;       
   height: 50px;
-  border-radius: 4px;
-  font-size: 15px;
-  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
 }
 
-.btns-production-actions #close:hover{
+.close:hover {
   background-color: #800d0d;
   cursor: pointer;
-  transition: 0.4s;
+  transition: background-color 0.4s;
 }
+
+

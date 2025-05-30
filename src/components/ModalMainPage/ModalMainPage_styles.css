@@ -10,16 +10,16 @@
     width: 25vw;
 }
 
-.close {
+.closeModal {
     position: relative;
     cursor: pointer;
 }
 
-.close:hover {
+.closeModal:hover {
     opacity: 0.5;
 }
 
-.close svg {
+.closeModal svg {
     position: absolute;
     right: 30px;
     top: 30px
