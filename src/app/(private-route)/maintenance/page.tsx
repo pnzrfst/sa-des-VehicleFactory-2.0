@@ -35,7 +35,7 @@ export default function Maintenance() {
             setMaintenance(response.data);
 
 
-            const itens: UlItem[] = response.data.map((maintenance) => ({
+            const itens: UlItem[] = response.data.map((maintenance : Maintenance) => ({
                 li1: maintenance.lote,
                 li2: maintenance.description,
                 li3: maintenance.createdAt,
