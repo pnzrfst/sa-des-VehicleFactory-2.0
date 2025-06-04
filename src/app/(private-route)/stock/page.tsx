@@ -1,5 +1,53 @@
+'use client'
+import { API } from "@/api";
 import MainPage from "@/components/MainPage";
+import { useEffect, useState } from "react";
+
+interface Product {
+  id: string,
+  description: string;
+  code: string;
+  unity: string;
+  stock: string
+}
+
+interface UlItem {
+  li1: string;
+  li2: string;
+  li3: string;
+  li4: string;
+  li5: string;
+}
+
+
+
 export default function Stock() {
+  const [products, setProducts] = useState<Product[]>([])
+  const [ulItens, setUlItens] = useState<UlItem[]>([])
+
+  useEffect(() => {
+    loadProducts()
+  }, [])
+
+  async function loadProducts() {
+    try {
+      const response = await API.get<Product[]>("/product");
+      console.log("Dados recebidos da API:", response.data);
+      setProducts(response.data);
+
+      const itens: UlItem[] = response.data.map((product: Product) => ({
+        li1: product.description,
+        li2: product.code,
+        li3: product.unity,
+        li4: product.stock,
+        li5: product.id
+      }));
+
+      setUlItens(itens);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div>
       <MainPage
@@ -13,62 +61,8 @@ export default function Stock() {
           "Estoque",
           "Ações",
         ]}
-        ulItens={[
-          {
-            li1: "Produto 1",
-            li2: "Exemplo01",
-            li3: "un",
-            li4: "Estoque",
-          },
-          {
-            li1: "Produto 2",
-            li2: "Exemplo02",
-            li3: "un",
-            li4: "Estoque",
-          },
-          {
-            li1: "Produto 3",
-            li2: "Exemplo03",
-            li3: "un",
-            li4: "Estoque",
-          },
-          {
-            li1: "Conserto",
-            li2: "Amortecedor traseiro",
-            li3: "0001",
-            li4: "01/10/2006 - 11/10/2006",
-          },
-          {
-            li1: "Conserto",
-            li2: "Amortecedor traseiro",
-            li3: "0001",
-            li4: "01/10/2006 - 11/10/2006",
-          },
-          {
-            li1: "Conserto",
-            li2: "Amortecedor traseiro",
-            li3: "0001",
-            li4: "01/10/2006 - 11/10/2006",
-          },
-          {
-            li1: "Conserto",
-            li2: "Amortecedor traseiro",
-            li3: "0001",
-            li4: "01/10/2006 - 11/10/2006",
-          },
-          {
-            li1: "Conserto",
-            li2: "Amortecedor traseiro",
-            li3: "0001",
-            li4: "01/10/2006 - 11/10/2006",
-          },
-          {
-            li1: "Conserto",
-            li2: "Amortecedor traseiro",
-            li3: "0001",
-            li4: "01/10/2006 - 11/10/2006",
-          }
-        ]}
+        ulItens={ulItens}
+        getTemplate={loadProducts}
       ></MainPage>
     </div>
   );

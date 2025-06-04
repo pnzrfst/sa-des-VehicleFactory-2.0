@@ -1,10 +1,10 @@
 'use client'
 
-import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
+
 import { LuPencil } from "react-icons/lu";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
-import { IoClose } from "react-icons/io5";
+
 import './styles.css'
 import { useState } from "react";
 import { ModalMainPage } from "../ModalMainPage";
@@ -12,7 +12,8 @@ import { MaintenanceForm } from "../Forms/Maintenance/MaintenanceForm";
 import { StockForm } from "../Forms/Stock/StockForm";
 import { ProductionForm } from "../Forms/Production/ProductionForm";
 import { usePathname, useRouter } from "next/navigation";
-import path from "path";
+import { API } from "@/api";
+
 
 //o modal ta la em baixo
 type MainPageProps = {
@@ -28,13 +29,14 @@ type MainPageProps = {
     }[],
     isProduction?: boolean
     numberProduction?: number
+    getTemplate: () => Promise<void>
 }
 
 
 
-export default function MainPage({ namePage, moduloPage, header, ulItens, isProduction = false, numberProduction }: MainPageProps) {
+export default function MainPage({ namePage, moduloPage, header, ulItens, isProduction = false, numberProduction, getTemplate }: MainPageProps) {
     const [openModal, setOpenModal] = useState(false);
-    const [selectedMaintenanceId, setSelectedMaintenanceId] = useState<string>("");
+    const [selectedId, setSelectedId] = useState<string>("");
     const [selectedProductionId, setSelectedProductionId] = useState<string>("");
 
     const [modalType, setModalType] = useState<'maintenance' | 'stock' | 'production' | null>(null)
@@ -67,20 +69,43 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
         typeModal = "production";
     }
 
-    
 
 
     const handleOpen = (type: "maintenance" | "stock" | "production", id: string, idProduction: string) => {
         setModalType(type);
         setOpenModal(true);
-        setSelectedMaintenanceId(id);
+        setSelectedId(id);
         setSelectedProductionId(idProduction)
     };
 
-    const handleClose = () => {
+    const handleClose = async () => {
         setOpenModal(false);
         setModalType(null);
+        await getTemplate()
     };
+
+    const handleDelete = async (id: string) => {
+        let endpoint = '';
+
+        if (pathName === "/stock") {
+            endpoint = "/product/delete";
+        } else if (pathName === "/maintenance") {
+            endpoint = "/maintenance/delete";
+        } else {
+            endpoint = "/production/delete";
+        }
+
+        try {
+            await API.delete(endpoint, {
+                data: { id }
+            });
+            await getTemplate(); // Atualiza os dados
+        } catch (error: any) {
+            console.error("Erro ao deletar item:", error.response?.data || error.message);
+            alert("Erro ao deletar item: " + (error.response?.data?.erro || error.message));
+        }
+    };
+
 
 
     return (
@@ -118,10 +143,14 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
                                         <button className='edit' ><LuPencil size={25} color='white' onClick={() => {
                                             {
                                                 handleOpen(typeModal, item.li5, item.li1);
-                                                // handleClick(item.li5);
+                                                console.log("abrindo modal com ID:", item.li5)
+
                                             }
                                         }}></LuPencil></button>
-                                        <button className='delete'><FaRegTrashCan size={25} color='white'></FaRegTrashCan></button>
+                                        <button className='delete' onClick={() => {
+                                            console.log("deletando modal com ID:", item.li5)
+                                            handleDelete(item.li5)
+                                        }}><FaRegTrashCan size={25} color='white'></FaRegTrashCan></button>
                                     </div>
                                 </li>
                             ))
@@ -176,8 +205,14 @@ export default function MainPage({ namePage, moduloPage, header, ulItens, isProd
             }
 
             <ModalMainPage open={openModal} handleClose={() => handleClose()}>
-                {modalType === 'maintenance' && <MaintenanceForm id={selectedMaintenanceId} idProduction={selectedProductionId}/>}
-                {modalType === 'stock' && <StockForm />}
+                {modalType === 'maintenance' && <MaintenanceForm id={selectedId} idProduction={selectedProductionId} onSuccess={() => {
+                    handleClose();
+                    getTemplate();
+                }} />}
+                {modalType === 'stock' && <StockForm code={selectedId} onSuccess={() => {
+                    handleClose();
+                    getTemplate();
+                }} />}
                 {modalType === 'production' && <ProductionForm />}
             </ModalMainPage>
 

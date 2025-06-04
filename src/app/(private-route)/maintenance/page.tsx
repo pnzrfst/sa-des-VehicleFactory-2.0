@@ -34,12 +34,23 @@ export default function Maintenance() {
             console.log("Dados recebidos da API:", response.data);
             setMaintenance(response.data);
 
+            const formatDate = (isoDate: string): string => {
+                const date = new Date(isoDate);
+                return date.toLocaleString("pt-BR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                });
+            };
+
 
             const itens: UlItem[] = response.data.map((maintenance : Maintenance) => ({
                 li1: maintenance.lote,
                 li2: maintenance.description,
-                li3: maintenance.createdAt,
-                li4: maintenance.updatedAt,
+                li3: formatDate(maintenance.createdAt),
+                li4: formatDate(maintenance.updatedAt),
                 li5: maintenance.id
             }));
 
@@ -54,7 +65,8 @@ export default function Maintenance() {
         <MainPage namePage="Manutenção"
             moduloPage="Veículos"
             header={["Selecionar", "Lote", "Descrição", "Data Entrada", "Última manutenção", "Ações"]}
-            ulItens={ulItens} 
+            ulItens={ulItens}
+            getTemplate={loadMaintenances} 
         />
     )
 }

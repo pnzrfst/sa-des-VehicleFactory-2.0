@@ -13,10 +13,11 @@ interface newMaintenance {
 interface MaintenanceFormProps {
     id: string;
     idProduction: string;
+    onSuccess?: () => void
   }
 
 
-export function MaintenanceForm({id, idProduction} : MaintenanceFormProps) {
+export function MaintenanceForm({id, idProduction, onSuccess} : MaintenanceFormProps) {
 
     const [description, setDescription] = useState<string>("")
     
@@ -28,6 +29,7 @@ export function MaintenanceForm({id, idProduction} : MaintenanceFormProps) {
         }
 
         await API.patch("/maintenance/update", newMaintenance);
+        if(onSuccess) onSuccess()
         console.log(newMaintenance);
     }
 
@@ -39,7 +41,7 @@ export function MaintenanceForm({id, idProduction} : MaintenanceFormProps) {
             <TextField label="Código da produção" variant="outlined" value={idProduction} />
             <textarea placeholder="Descrição" className="text-area-maintenance" onChange={(e) => setDescription(e.target.value)} />
             <div className="buttonGroup">
-                <Button src="Cadastrar" dataType="basic-button" onClick={registerMaintenance} />
+                <Button src="Registrar manutenção" dataType="basic-button" onClick={registerMaintenance} />
             </div>
         </>
     );
