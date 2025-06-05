@@ -4,9 +4,8 @@
 import { LuPencil } from "react-icons/lu";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
-
 import './styles.css'
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { ModalMainPage } from "../ModalMainPage";
 import { MaintenanceForm } from "../Forms/Maintenance/MaintenanceForm";
 import { StockForm } from "../Forms/Stock/StockForm";
@@ -15,13 +14,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { API } from "@/api";
 
 
-interface Product {
-    description: string;
-    code: string;
-    unity: string;
-    stock: number;
-    id: string;
-}
 
 
 //o modal ta la em baixo
@@ -46,34 +38,13 @@ type MainPageProps = {
 export default function MainPage({ namePage, moduloPage, header, ulItens, isProduction = false, numberProduction, getTemplate }: MainPageProps) {
     const [openModal, setOpenModal] = useState(false);
     // const [vehicle, setVehicle] = useState<string>("")
-    const [search, setSearch] = useState<string>("")
-    const [stock, setStockResults] = useState<Product[]>([]);
+    
     const [selectedId, setSelectedId] = useState<string>("");
     const [selectedProductionId, setSelectedProductionId] = useState<string>("");
 
     const [modalType, setModalType] = useState<'maintenance' | 'stock' | 'production' | null>(null)
     const [selectedIndex, setSelectedIndex] = useState<number[]>([]);
 
-    async function getStockItens (description: string){
-        try {
-            const response = await API.get("/product/filtered", {
-                params: {search: description}
-            })
-
-            setStockResults(response.data);
-            console.log(response.data)
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    useEffect(() => {
-        if(search.length >= 2){
-            getStockItens(search);
-        }else{
-            setStockResults([]);
-        }
-    }, [search])
 
 
     const toggleSelected = (index: number) => {
