@@ -12,9 +12,20 @@ interface Product {
   id: string;
 }
 
-export function ProductionForm() {
+type ProductionForm = {
+  isOpen: boolean,
+  onClose : () => void,
+  onAddProduct: (product: Product) => void
+}
+
+
+
+
+export function ProductionForm({isOpen, onClose, onAddProduct} : ProductionForm ) {
   const [search, setSearch] = useState<string>("");
   const [stock, setStockResults] = useState<Product[]>([]);
+  
+
 
   async function getStockItens(description: string) {
     try {
@@ -24,7 +35,6 @@ export function ProductionForm() {
 
       console.log(search);
       setStockResults(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +48,7 @@ export function ProductionForm() {
     }
   }, [search]);
 
-  return (
+  return isOpen ?(
     <div className="form-container">
       <h1>Composição</h1>
 
@@ -69,10 +79,10 @@ export function ProductionForm() {
               <p>{product.unity}</p>
               <strong>{product.stock}</strong>
             </div>
-            <button>Adicionar</button>
+            <button onClick={() => onAddProduct(product)}>Adicionar</button>
           </li>
         ))}
       </ul>
     </div>
-  );
+  ): null;
 }
