@@ -12,20 +12,27 @@ interface Product {
   id: string;
 }
 
-type ProductionForm = {
-  isOpen: boolean,
-  onClose : () => void,
-  onAddProduct: (product: Product) => void
+interface CompositionProduct {
+  product: Product;
+  quantity: number;
 }
 
+type ProductionForm = {
+  isOpen: boolean;
+  onClose: () => void;
+  onAddProduct: ({product, quantity} : CompositionProduct) => void;
+};
 
-
-
-export function ProductionForm({isOpen, onClose, onAddProduct} : ProductionForm ) {
+export function ProductionForm({
+  isOpen,
+  onClose,
+  onAddProduct,
+}: ProductionForm) {
   const [search, setSearch] = useState<string>("");
   const [stock, setStockResults] = useState<Product[]>([]);
-  
-
+  const [quantities, setQuantities] = useState<{ [productId: string]: number }>(
+    {}
+  );
 
   async function getStockItens(description: string) {
     try {
@@ -48,7 +55,7 @@ export function ProductionForm({isOpen, onClose, onAddProduct} : ProductionForm 
     }
   }, [search]);
 
-  return isOpen ?(
+  return isOpen ? (
     <div className="form-container">
       <h1>Composição</h1>
 
@@ -79,10 +86,31 @@ export function ProductionForm({isOpen, onClose, onAddProduct} : ProductionForm 
               <p>{product.unity}</p>
               <strong>{product.stock}</strong>
             </div>
-            <button onClick={() => onAddProduct(product)}>Adicionar</button>
+            <div className="actions">
+              <input
+                type="number"
+                name="selectQuantity"
+                min={1}
+                value={quantities[product.id] || ""}
+                onChange={(e) =>
+                  setQuantities({
+                    ...quantities,
+                    [product.id]: Number(e.target.value),
+                  })
+                }
+              />
+              <button
+                onClick={() => {
+                  const quantity = quantities[product.id] || 1;
+                  onAddProduct({product, quantity});
+                }}
+              >
+                Adicionar
+              </button>
+            </div>
           </li>
         ))}
       </ul>
     </div>
-  ): null;
+  ) : null;
 }

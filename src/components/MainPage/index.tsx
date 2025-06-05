@@ -29,6 +29,11 @@ interface Product {
   id: string;
 }
 
+interface CompositionProduct {
+  product: Product;
+  quantity: number;
+}
+
 //o modal ta la em baixo
 type MainPageProps = {
   namePage?: string;
@@ -138,20 +143,38 @@ export default function MainPage({
   const [vehicle, setVehicle] = useState<string>("");
   const [quantityProduced, setQuantityProduced] = useState<number>(0);
   const [dateStartInfo, setDateStart] = useState<Date | null>(null);
-  const [composition, setComposition] = useState<Product[]>([]);
+  const [composition, setComposition] = useState<CompositionProduct[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  function handleAddProduct(product: Product) {
-    setComposition((prev) => [...prev, product]);
+  function handleAddProduct({ product, quantity }: CompositionProduct) {
+    setComposition((prev) => [...prev, { product, quantity }]);
+    console.log(composition);
   }
 
-  async function handleCreateNewProduction(production: Production) {
+  async function handleCreateNewProduction() {
+    const vehicleComposition = composition.map((item) => ({
+      productId: item.product.id,
+      quantityPerVehicle: item.quantity,
+    }));
+
     const newProduction: Production = {
       vehicleProduced: vehicle,
       quantity: quantityProduced,
       dateStart: dateStartInfo,
-      vehicleComposition: {},
+      vehicleComposition: vehicleComposition,
     };
+
+    try {
+      await API.post("/production/create", newProduction);
+      setVehicle("");
+      setQuantityProduced(0);
+      setDateStart(null);
+      setComposition([])
+      window.alert("Produção criada.");
+    } catch (error) {
+      console.log(error);
+      console.log("caiu no catch");
+    }
   }
 
   return (
@@ -228,6 +251,8 @@ export default function MainPage({
                 type="text"
                 name="nameProduct"
                 id="nameProduct"
+                required
+                value={vehicle}
                 onChange={(e) => setVehicle(e.target.value)}
               />
               <label htmlFor="text">Quantidade</label>
@@ -235,6 +260,8 @@ export default function MainPage({
                 type="number"
                 name="qtdProduct"
                 id="qtdProduct"
+                required
+                value={quantityProduced}
                 onChange={(e) => setQuantityProduced(e.target.valueAsNumber)}
               />
             </div>
@@ -243,29 +270,30 @@ export default function MainPage({
               <div className="composicao">
                 <h3>Composição</h3>
                 <div className="composicao-items">
-                    <ul>
-                  {
-                    composition.map((item) => (
-                       <li>
-                        {
-                        item.description
-                        }
+                  {composition.length > 0 ? (
+                    <ul className="list-composition">
+                      {composition.map((item) => (
+                        <li key={item.product.id} className="listed-itens">
+                          Nome: {item.product.description}
+                          <br />
+                          Quantidade adicionada(por veículo): {item.quantity}
                         </li>
-                        
-                    ))
-                  }
+                      ))}
                     </ul>
+                  ) : (
+                    <div>
+                      Nenhum item adicionado. Comece a adicionar itens para a sua produção! :D
+                    </div>
+                  )}
                 </div>
 
                 <IoMdAdd
                   size={30}
                   color="#1A73E8"
-                  onClick={
-                    () => {handleOpen(typeModal, "", "")
-                    setIsModalOpen(true);}
-                }
-
-                  
+                  onClick={() => {
+                    handleOpen(typeModal, "", "");
+                    setIsModalOpen(true);
+                  }}
                 />
               </div>
 
@@ -275,6 +303,7 @@ export default function MainPage({
                   type="datetime-local"
                   name="start"
                   id="startProduction"
+                  required
                   onChange={(e) => {
                     const value = e.target.value;
                     setDateStart(value ? new Date(value) : null);
@@ -289,7 +318,11 @@ export default function MainPage({
                   >
                     X
                   </button>
-                  <button type="button" className="production">
+                  <button
+                    type="button"
+                    className="production"
+                    onClick={() => handleCreateNewProduction()}
+                  >
                     Produzir
                   </button>
                 </div>

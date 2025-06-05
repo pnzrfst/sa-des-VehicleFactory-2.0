@@ -8,7 +8,7 @@ interface Product {
   description: string;
   code: string;
   unity: string;
-  stock: string
+  stock: string;
 }
 
 interface UlItem {
@@ -19,20 +19,25 @@ interface UlItem {
   li5: string;
 }
 
-
-
 export default function Stock() {
-  const [products, setProducts] = useState<Product[]>([])
-  const [ulItens, setUlItens] = useState<UlItem[]>([])
+  const [products, setProducts] = useState<Product[]>([]);
+  const [ulItens, setUlItens] = useState<UlItem[]>([]);
+  const [showForm, setShowForm] = useState(false);
+
+  const [newProduct, setNewProduct] = useState({
+    description: '',
+    code: '',
+    unity: '',
+    stock: ''
+  });
 
   useEffect(() => {
-    loadProducts()
-  }, [])
+    loadProducts();
+  }, []);
 
   async function loadProducts() {
     try {
       const response = await API.get<Product[]>("/product");
-      console.log("Dados recebidos da API:", response.data);
       setProducts(response.data);
 
       const itens: UlItem[] = response.data.map((product: Product) => ({
@@ -48,7 +53,33 @@ export default function Stock() {
       console.log(error);
     }
   }
+
+  async function handleCreateProduct() {
+    try {
+      const payload = {
+        ...newProduct,
+        stock: parseFloat(newProduct.stock)  // garantir número
+      };
+
+      await API.post("/product/create", payload);
+      alert("Produto cadastrado com sucesso!");
+
+      setNewProduct({
+        description: '',
+        code: '',
+        unity: '',
+        stock: ''
+      });
+      setShowForm(false);
+      loadProducts();
+    } catch (error) {
+      console.log(error);
+      alert("Erro ao cadastrar produto!");
+    }
+  }
+
   return (
+    
     <div>
       <MainPage
         namePage="Estoque"
@@ -63,7 +94,7 @@ export default function Stock() {
         ]}
         ulItens={ulItens}
         getTemplate={loadProducts}
-      ></MainPage>
+      />
     </div>
   );
 }
