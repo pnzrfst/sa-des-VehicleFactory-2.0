@@ -10,6 +10,7 @@ import { StockForm } from "../Forms/Stock/StockForm";
 import { ProductionForm } from "../Forms/Production/ProductionForm";
 import { usePathname, useRouter } from "next/navigation";
 import { API } from "@/api";
+import { CreateProductForm } from "../Forms/Stock/createProduct/CreateProduct";
 
 interface Production {
   vehicleProduced: string;
@@ -19,14 +20,6 @@ interface Production {
     productId: string;
     quantityPerVehicle: number;
   }[];
-}
-
-interface Product {
-  description: string;
-  code: string;
-  unity: string;
-  stock: number;
-  id: string;
 }
 
 interface CompositionProduct {
@@ -60,6 +53,7 @@ export default function MainPage({
   numberProduction,
   getTemplate,
 }: MainPageProps) {
+  const [showForm, setShowForm] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [selectedId, setSelectedId] = useState<string>("");
   const [selectedProductionId, setSelectedProductionId] = useState<string>("");
@@ -169,7 +163,7 @@ export default function MainPage({
       setVehicle("");
       setQuantityProduced(0);
       setDateStart(null);
-      setComposition([])
+      setComposition([]);
       window.alert("Produção criada.");
     } catch (error) {
       console.log(error);
@@ -197,6 +191,18 @@ export default function MainPage({
       </div>
       {!isProduction ? (
         <div className="datagrid">
+          {pathName === "/stock" && (
+            <div className="formNewProduct">
+              <button
+                className="btn-addNewProduct"
+                onClick={() => setShowForm(!showForm)}
+              >
+                {showForm ? <>Fechar formulário</> : <>Cadastrar produto</>}
+              </button>
+
+              {showForm && <CreateProductForm onSuccess={() => getTemplate}/>}
+            </div>
+          )}
           <ul>
             {ulItens?.map((item, index) => (
               // Aqui vai ficar o quadradinho azul !!!
@@ -282,7 +288,8 @@ export default function MainPage({
                     </ul>
                   ) : (
                     <div>
-                      Nenhum item adicionado. Comece a adicionar itens para a sua produção! :D
+                      Nenhum item adicionado. Comece a adicionar itens para a
+                      sua produção! :D
                     </div>
                   )}
                 </div>

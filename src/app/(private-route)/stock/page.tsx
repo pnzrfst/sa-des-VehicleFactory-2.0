@@ -1,10 +1,10 @@
-'use client'
+"use client";
 import { API } from "@/api";
 import MainPage from "@/components/MainPage";
 import { useEffect, useState } from "react";
 
 interface Product {
-  id: string,
+  id: string;
   description: string;
   code: string;
   unity: string;
@@ -22,14 +22,6 @@ interface UlItem {
 export default function Stock() {
   const [products, setProducts] = useState<Product[]>([]);
   const [ulItens, setUlItens] = useState<UlItem[]>([]);
-  const [showForm, setShowForm] = useState(false);
-
-  const [newProduct, setNewProduct] = useState({
-    description: '',
-    code: '',
-    unity: '',
-    stock: ''
-  });
 
   useEffect(() => {
     loadProducts();
@@ -45,7 +37,7 @@ export default function Stock() {
         li2: product.code,
         li3: product.unity,
         li4: product.stock,
-        li5: product.id
+        li5: product.id,
       }));
 
       setUlItens(itens);
@@ -54,32 +46,7 @@ export default function Stock() {
     }
   }
 
-  async function handleCreateProduct() {
-    try {
-      const payload = {
-        ...newProduct,
-        stock: parseFloat(newProduct.stock)  // garantir número
-      };
-
-      await API.post("/product/create", payload);
-      alert("Produto cadastrado com sucesso!");
-
-      setNewProduct({
-        description: '',
-        code: '',
-        unity: '',
-        stock: ''
-      });
-      setShowForm(false);
-      loadProducts();
-    } catch (error) {
-      console.log(error);
-      alert("Erro ao cadastrar produto!");
-    }
-  }
-
   return (
-    
     <div>
       <MainPage
         namePage="Estoque"

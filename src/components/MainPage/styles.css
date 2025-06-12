@@ -53,6 +53,18 @@
   overflow-y: scroll;
 }
 
+.datagrid .btn-addNewProduct{
+  width: 25%;
+  background-color: #1a73e8;
+  border: none;
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 4px;
+  border-radius: 10px;
+  text-align: center;
+}
 .datagrid ul {
   background-color: white;
   list-style: none;

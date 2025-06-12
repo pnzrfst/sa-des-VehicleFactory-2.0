@@ -1,0 +1,17 @@
+.modalDiv{
+    display: flex;
+    background-color: #fff;
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+
+.modalDiv h1{
+    margin-bottom: 1rem;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
