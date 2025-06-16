@@ -11,7 +11,7 @@ export default function LateralMenu() {
     const itens = [
         {
             label: "Início",
-            page: '/home',
+            page: '/mainpage',
         },
         {
             label: "Manutenção",

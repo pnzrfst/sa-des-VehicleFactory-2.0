@@ -2,7 +2,7 @@
 import './styles.css'
 
 
-export default function Home() {
+export default function MainPage() {
     return (
         <section className="bg-section">
             <section className="itens">
